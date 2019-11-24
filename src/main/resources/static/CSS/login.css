@@ -1,0 +1,67 @@
+@charset "UTF-8";
+/* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+
+.row.content {
+    height: 1500px
+}
+
+/* Set gray background color and 100% height */
+
+.sidenav {
+    background-color: #f1f1f1;
+    height: 100%;
+}
+
+/* Set black background color, white text and some padding */
+
+#h1Password, #h1Username {
+    font-size: 70px;
+    font-family: 'BlackJackRegular';
+}
+
+#h1Footer {
+    font-size: 80px;
+}
+
+footer {
+    background-color: #D12231;
+    color: white;
+    padding: 33px 100px;
+    font-family: 'BlackJackRegular';
+}
+
+input {
+    width: 310px;
+    font-size: 18px;
+}
+
+#logIn {
+    background-color: #282828;
+    color: white;
+    cursor: pointer;
+    border: none;
+    font-size: 17px;
+    padding: 10px 20px;
+    border-radius: 8px;
+}
+
+#error{
+    color: #D12231;
+    font-size: 25px;
+}
+
+ion-icon {
+    font-size: 18px;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+
+@media screen and (max-width: 767px) {
+    .sidenav {
+        height: auto;
+        padding: 15px;
+    }
+    .row.content {
+        height: auto;
+    }
+}

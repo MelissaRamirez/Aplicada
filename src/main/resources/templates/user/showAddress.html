@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <meta charset="UTF-8">
+    <div th:replace="commons/nav-bars :: header-administrador"></div>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/CSS/user/user.css}">
+    <link rel="stylesheet" th:href="@{/CSS/Fonts/font-blackjack.css}">
+    <title>Address</title>
+</head>
+
+<body>
+    <nav th:insert="commons/nav-bars :: navbar-cliente"></nav>
+    <h1>Administrar Direcciones</h1>
+
+    <button onclick="location.href='./AddAddress'" class="btn btn-outline-info">Agregar Dirección</button>
+    <table id="table_manager" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Dirección:</th>
+                <th>Ciudad: </th>
+                <th>Provincia/Estado:</th>
+                <th>Código Postal:</th>
+                <th>Acción:</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="address: ${addresses}">
+                <td th:text="${address.addressLine}"></td>
+                <td th:text="${address.city}"></td>
+                <td th:text="${address.state}"></td>
+                <td th:text="${address.postalCode}"></td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <form action="#" th:action="@{/modifyAddress}" method="POST">
+                            <input type="hidden" th:value="${address.id}" name="id">
+                            <button id="btn_delete_manager" type="submit" class="btn btn-outline-danger">Modificar
+                                <ion-icon name="brush"></ion-icon></button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button id="btn_back" type="button" class="btn btn-outline-dark" onclick="location.href='./home'">
+        <ion-icon name="arrow-round-back">
+        </ion-icon>Regresar
+    </button>
+
+    <div th:replace="commons/nav-bars :: scripts-administrador"></div>
+</body>
+
+</html>

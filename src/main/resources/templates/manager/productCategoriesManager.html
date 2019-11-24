@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8">
+<title>Product Category</title>
+</head>
+<body>
+        <nav th:insert="commons/nav-bars :: navbar-administrador"></nav>
+        <h1 id="title">Administración de Categorías</h1>
+        <h3 id="search_product_category">Buscar: </h3><input id="searched_product_category">
+        <button id="btn_add_product_category">Agregar Categoría</button>
+        <table id="table_product_categories">
+            <thead>
+                <tr>
+                    <th>Nombre Categoría</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th></th>
+                    <th>
+                        <button id="btn_update_product_category">Modificar</button>
+                        <button id="btn_delete_product_category">Eliminar</button>
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+
+</body>
+</html>

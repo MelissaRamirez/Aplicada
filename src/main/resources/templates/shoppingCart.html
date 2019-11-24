@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8">
+				<h1>ShoppingCart</h1>
+				<form action="#" th:object="${form}" th:action="@{/shoppingCart}">
+					<div class="form-group row" method="post">
+						<label class="control-label col-sm-2">Unidades disponibles</label>
+
+						<input class="form-control" type="text" th:field="*{unitsOnStock}"
+							placeholder="unitsOnStock" readonly>
+					</div>
+					
+					<select th:field="*{unitsOnStock}">
+					<option th:each="i : ${#numbers.sequence(1, 5)}" th:value="${i}"
+						th:text="${i}" th:selected="${i==75}"></option>
+					</select>
+				</form>
+				<div class="form-group row">
+					<label class="control-label col-sm-2">Seleccione la
+						cantidad de productos</label> <input class="form-control" id="cntd"
+						type="text" placeholder="Cantidad productos">
+					<div class="col-sm-5">
+						<input type="submit" value="Insertar" class="btn btn-primary">
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

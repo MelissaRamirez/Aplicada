@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Historial de ordenes</title>
+    <div th:replace="commons/nav-bars :: header-administrador"></div>
+</head>
+<body>
+<div th:replace="commons/nav-bars :: navbar-cliente"></div>
+<div class="container">
+    <div th:if="${!orders.isEmpty()}">
+        <table class="table table-striped table-bordered table-sm">
+            <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Dirección</th>
+                <th>Fecha de orden</th>
+                <th>Fecha de envio</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="order : ${orders}">
+                <td th:text="${order.id}"></td>
+                <td th:text="${order.shippingAddress}"></td>
+                <td th:text="${order.orderDate}"></td>
+                <td th:text="${order.shipDate}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <td><a class="btn btn-primary btn-sm"
+               th:href="@{/home}">Volver</a></td>
+    </div>
+</div>
+<div th:replace="commons/nav-bars :: scripts-administrador"></div>
+</body>
+</html>

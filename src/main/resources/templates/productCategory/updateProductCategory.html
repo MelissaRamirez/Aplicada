@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <div th:replace="commons/nav-bars :: header-administrador"></div>
+    <meta charset="UTF-8">
+    <title>Product Category</title>
+    <link rel="stylesheet" th:href="@{/CSS/ProductCategory/productCategoryManager.css}">
+    <link rel="stylesheet" th:href="@{/CSS/Fonts/font-blackjack.css}">
+</head>
+
+<body>
+
+    <nav th:insert="commons/nav-bars :: navbar-administrador"></nav>
+    <h1>Modificar Categoría</h1>
+
+    <form action="#" th:object="${productCategoryForm}" th:action="@{/UpdateProductCategoryConfirm}" method="POST">
+        <div class="form-group">
+            <input type="hidden" th:field="*{id}">
+            <label>Nombre de la Categoría:</label>
+            <input type="text" class="form-control" placeholder="Digite el nombre de la categoría" th:field="*{name}" />
+            <br>
+            <label>Escoja el Impuesto de la Categoría: </label>
+            <select class="form-control" id="select_tax" th:field="*{tax}">
+                <option value="-1">Seleccione un Impuesto</option>
+                <option th:each="tax : ${taxes}" th:value="${tax.id}" th:text="${tax.type}"
+                    th:selected="(${tax.id} == *{tax})"></option>
+            </select>
+            <br>
+            <label>Seleccione los productos que desea agregar a esta categoría</label>
+            <table id="table_products" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre Producto</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="product : ${productsCategory}">
+                        <td th:id="${product.id}" th:text="${product.name}"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="submit" class="btn btn-outline-primary">Modificar</button>
+            <button type="button" class="btn btn-outline-warning"
+                onclick="location.href='./ProductCategory'">Cancelar</button>
+        </div>
+    </form>
+
+    <div th:replace="commons/nav-bars :: scripts-administrador"></div>
+
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <div th:replace="commons/nav-bars :: header-administrador"></div>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/CSS/user/user.css}">
+    <link rel="stylesheet" th:href="@{/CSS/Fonts/font-blackjack.css}">
+    <title>Customer Details</title>
+</head>
+
+<body>
+    <h1>Detalles del Cliente</h1>
+    <form action="#" th:object="${addressForm}" th:action="@{/AddCustomerDetails}" method="POST">
+        <div class="form-group" >
+            <input id="id" type="hidden" th:value="${customer.id}">
+            <label>Dirección lo más exacta posible:</label>
+            <input id="addressLine" class="form-control" placeholder="Ingrese su dirección" type="text" th:field="*{addressLine}">
+            <label>Cuidad:</label>
+            <input id="city" type="text" class="form-control" placeholder="Ingresesu ciudad"th:field="*{city}">
+            <label>Provincia:</label>
+            <input id="state" class="form-control" placeholder="Ingrese su provincia" type="text" th:field="*{state}">
+            <label>Código Postal:</label>
+            <input id="postalCode" type="text" class="form-control" placeholder="Ingrese su código postal" th:field="*{postalCode}">
+
+            <div>
+                <button type="submit" class="btn btn-outline-success">Agregar</button>
+                <button type="button" onclick="location.href='./logOut'"
+                    class="btn btn-outline-danger">Cancelar</button>
+            </div>
+
+        </div>
+    </form>
+    <div th:replace="commons/nav-bars :: scripts-administrador"></div>
+
+</body>
+
+</html>

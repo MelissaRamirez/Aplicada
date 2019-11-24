@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <div th:replace="commons/nav-bars :: header-administrador"></div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/CSS/user/user.css}">
+    <link rel="stylesheet" th:href="@{/CSS/Fonts/font-blackjack.css}">
+    <title>Employee</title>
+</head>
+
+<body>
+    <nav th:insert="commons/nav-bars :: navbar-administrador"></nav>
+    <h1>Administrar Empleados</h1>
+    <div sec:authorize="hasAuthority('Administrador')">
+        <button onclick="location.href='./AddEmployee'" class="btn btn-outline-info">Agregar Empleado</button>
+    </div>
+    <table id="table_employee" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Nombre: </th>
+                <th>Nombre de Usuario: </th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.firstName} + ' ' + ${user.lastName}"></td>
+                <td th:text="${user.userName}"></td>
+                <td>
+                    <div sec:authorize="hasAuthority('Administrador')">
+                        <div class="btn-group" role="group">
+                            <form action="#" th:action="@{/UpdateEmployee}" method="POST">
+                                <input type="hidden" th:value="${user.id}" name="id">
+                                <button id="btn_update_employee" type="submit" class="btn btn-outline-primary">Modificar
+                                    <ion-icon name="create"></ion-icon></button>
+                            </form>
+                            <form action="#" th:action="@{/DeleteEmployee}" method="POST">
+                                <input type="hidden" th:value="${user.id}" name="id">
+                                <button id="btn_delete_employee" type="submit" class="btn btn-outline-danger">Desactivar
+                                    <ion-icon name="power"></ion-icon></button>
+                            </form>
+                        </div>
+                    </div>
+                    <div sec:authorize="hasAuthority('Empleado')">
+                        <spam>No está autorizado para ver las acciones</spam>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button id="btn_back" type="button" class="btn btn-outline-dark" onclick="location.href='./User'">
+        <ion-icon name="arrow-round-back">
+        </ion-icon>Regresar
+    </button>
+
+    <div th:replace="commons/nav-bars :: scripts-administrador"></div>
+</body>
+
+</html>

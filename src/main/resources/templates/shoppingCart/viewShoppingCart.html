@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <div th:replace="commons/nav-bars :: header-administrador"></div>
+    <link rel="stylesheet" th:href="@{/CSS/user/user.css}">
+    <link rel="stylesheet" th:href="@{/CSS/Fonts/font-blackjack.css}">
+    <title>Shopping Cart</title>
+</head>
+
+<body>
+        <nav th:insert="commons/nav-bars :: navbar-cliente"></nav>
+    <h1>
+        Carrito de compras de: <span sec:authentication="principal.username">User</span>
+    </h1>
+    <div th:if="${products.isEmpty()}">
+        <span>Su carrito se encuentra vacío</span>
+    </div>
+    <div th:if="${!products.isEmpty()}">
+
+        <table id="cart_items" class="table table-bordered table-striped">
+            <thead>
+                <th>Nombre del Product</th>
+                <th>Cantidad</th>
+                <th>Acción</th>
+            </thead>
+            <tbody>
+                <tr th:each="product : ${products}">
+                    <td th:text="${product.name}"></td>
+                    <td th:text="${product.unitsOnStock}"></td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <form action="#" th:action="@{/UpdateItem}" method="POST">
+                                <input type="hidden" th:value="${product.id}" name="id">
+                                <button id="btn_update_product_category" type="submit" class="btn btn-outline-primary">
+                                    Modificar
+                                    <ion-icon name="create"></ion-icon>
+                                </button>
+                            </form>
+                            <form action="#" th:action="@{/DeleteItem}" method="POST"
+                                onsubmit="return confirm('Esta acción es irreversible ¿Desea continuar?');">
+                                <input type="hidden" th:value="${product.id}" name="id">
+                                <button id="btn_delete_product_category" type="submit" class="btn btn-outline-danger">
+                                    Eliminar
+                                    <ion-icon name="trash"></ion-icon>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="btn btn-primary" type="submit" onclick="location.href='./saveOrder'">Ordenar</button>
+    </div>
+
+    <div th:replace="commons/nav-bars :: scripts-administrador"></div>
+
+</body>
+
+</html>

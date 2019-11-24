@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <div th:replace="commons/nav-bars :: header-administrador"></div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/CSS/user/user.css}">
+    <link rel="stylesheet" th:href="@{/CSS/Fonts/font-blackjack.css}">
+    <title>Employee</title>
+</head>
+
+<body>
+    <nav th:insert="commons/nav-bars :: navbar-administrador"></nav>
+    <h1>Agregar Empleado</h1>
+    <form action="#" th:object="${userForm}" th:action="@{/AddEmployee}" method="POST">
+        <div class="form-group">
+            <div>
+                <label>Identificación: </label>
+                <input id="identification" class="form-control" placeholder="Identificación" th:field="*{identification}">
+                <div th:if="${#fields.hasErrors('identification')}"><span style="color: red">Ingrese una identificación válida</span></div>
+            </div>
+            <div>
+                <label>Nombre: </label>
+                <input id="firstname" class="form-control" placeholder="Nombre" th:field="*{firstName}">
+                <div th:if="${#fields.hasErrors('firstName')}"><span style="color: red">El nombre debe tener al menos 2 caracteres y máximo 50</span></div>
+            </div>
+            <div>
+                <label>Apellidos: </label>
+                <input id="lastname" class="form-control" placeholder="Apelllidos" th:field="*{lastName}">
+                <div th:if="${#fields.hasErrors('lastName')}"><span style="color: red">El apellido debe ser de al menos 2 caracteres y máximo 50</span></div>
+            </div>
+            <div>
+                <label>Nombre de Usuario: </label>
+                <input id="username" class="form-control" placeholder="Nombre de Usuario" th:field="*{userName}">
+                <div th:if="${#fields.hasErrors('userName')}"><span style="color: red">El nombre de usuario debe ser de al menos 4 caracteres y máximo 70</span></div>
+            </div>
+            <div>
+                <label>Contraseña: </label>
+                <input type="password" class="form-control" id="password" placeholder="Contraseña" th:field="*{password}">
+                <div th:if="${#fields.hasErrors('password')}"><span style="color: red">La contraseña debe ser de mínimo 6 caracteres y máximo 50</span></div>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-outline-success">Agregar</button>
+                <button type="button" onclick="location.href='./Employee'"
+                    class="btn btn-outline-danger">Cancelar</button>
+            </div>
+        </div>
+
+    </form>
+    <div th:replace="commons/nav-bars :: scripts-administrador"></div>
+</body>
+
+</html>

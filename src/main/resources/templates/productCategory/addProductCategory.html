@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <div th:replace="commons/nav-bars :: header-administrador"></div>
+    <meta charset="UTF-8">
+    <title>Product Category</title>
+    <link rel="stylesheet" th:href="@{/CSS/ProductCategory/productCategoryManager.css}">
+    <link rel="stylesheet" th:href="@{/CSS/Fonts/font-blackjack.css}">
+</head>
+
+<body>
+
+    <nav th:insert="commons/nav-bars :: navbar-administrador"></nav>
+    <h1>Agregar Categoría</h1>
+
+    <form action="#" th:object="${categoryForm}" th:action="@{/AddProductCategory}" method="POST">
+        <div class="form-group">
+            <label>Nombre de la Categoría:</label>
+            <input type="text" id="categoryName" class="form-control" placeholder="Digite el nombre de la categoría" th:field="*{name}" />
+            <div th:if="${#fields.hasErrors('name')}">
+                <span style="color: red">Debe ingresar un nombre que contenga como mínimo 5 caracteres y máximo 40</span>
+            </div>
+            <br>
+            <label>Escoja el Impuesto de la Categoría: </label>
+            <select class="form-control" id="select_tax" th:field="*{tax}">
+                <option value="-1">Seleccione un Impuesto</option>
+                <option th:each="tax : ${taxes}" th:value="${tax.id}" th:text="${tax.type}"></option>
+            </select>
+            <br>
+            <button type="submit" class="btn btn-outline-primary">Agregar</button>
+            <button type="button" class="btn btn-outline-warning"
+                onclick="location.href='./ProductCategory'">Cancelar</button>
+        </div>
+    </form>
+
+    <div th:replace="commons/nav-bars :: scripts-administrador"></div>
+
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:insert="commons/nav-bars :: header-administrador">
+    <meta charset="UTF-8">
+    <title>Venticas Manager</title>
+</head>
+
+<body>
+    <nav th:insert="commons/nav-bars :: navbar-administrador"></nav>
+    <div>
+        <p>Bienvenido Adiministrador, aquí usted podrá monitorear todo el ambiente de la aplicación
+        </p>
+        <p>Se tienen ordenes #ordenes activas</p>
+        <p>Total de ordenes del día: </p>
+        <p>Total de ordenes finalizadas de hoy: </p>
+        <div sec:authentication="principal.authorities">Text visible to user</div>
+    </div>
+
+    <div th:replace="commons/nav-bars :: scripts-administrador">
+    </div>
+</body>
+
+</html>

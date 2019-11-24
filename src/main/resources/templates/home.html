@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+	<div th:replace="commons/nav-bars :: header-administrador"></div>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" th:href="@{/CSS/user/user.css}">
+	<link rel="stylesheet" th:href="@{/CSS/Fonts/font-blackjack.css}">
+	<title>Venticas</title>
+</head>
+
+<body>
+	<nav th:insert="commons/nav-bars :: navbar-cliente"></nav>
+	<br>
+	<h1>Bienvenido Venticas: <span sec:authentication="principal.username">User</span></h1>
+	
+
+	<div th:replace="commons/nav-bars :: scripts-administrador"></div>
+</body>
+
+</html>

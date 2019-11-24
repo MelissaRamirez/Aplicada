@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <div th:replace="commons/nav-bars :: header-administrador"></div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/CSS/user/user.css}">
+    <link rel="stylesheet" th:href="@{/CSS/Fonts/font-blackjack.css}">
+    <title>Deactivate</title>
+</head>
+
+<body>
+    <nav th:insert="commons/nav-bars :: navbar-administrador"></nav>
+    <h1>Desactivar Usuario</h1>
+    <form action="#" th:object="${userForm}" th:action="@{/DeactivateManagerConfirm}" method="POST"
+        onsubmit="return confirm('Esta acción es irreversible ¿Desea continuar?');">
+        <div class="form-group">
+            <div>
+                <input type="hidden" th:field="*{id}">
+                <label>Identificación: </label>
+                <input id="identification" class="form-control" placeholder="Identificación"
+                    th:field="*{identification}" readonly>
+            </div>
+            <div>
+                <label>Nombre: </label>
+                <input id="firstname" class="form-control" placeholder="Nombre" th:field="*{firstName}" readonly>
+            </div>
+            <div>
+                <label>Apellidos: </label>
+                <input id="lastname" class="form-control" placeholder="Apelllidos" th:field="*{lastName}" readonly>
+            </div>
+            <div>
+                <label>Nombre de Usuario: </label>
+                <input id="username" class="form-control" placeholder="Nombre de Usuario" th:field="*{userName}"
+                    readonly>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-outline-danger">Desactivar</button>
+                <button type="button" onclick="location.href='./User'" class="btn btn-outline-primary">Cancelar</button>
+            </div>
+        </div>
+
+    </form>
+    <div th:replace="commons/nav-bars :: scripts-administrador"></div>
+</body>
+
+</html>

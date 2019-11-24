@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <div th:replace="commons/nav-bars :: header-administrador"></div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/CSS/user/user.css}">
+    <link rel="stylesheet" th:href="@{/CSS/Fonts/font-blackjack.css}">
+    <title>Users</title>
+</head>
+
+<body>
+    <nav th:insert="commons/nav-bars :: navbar-administrador"></nav>
+    <h1>Administración de Usuarios</h1>
+    <br>
+    <div class="card-deck">
+        <div class="card" sec:authorize="hasAuthority('Administrador')">
+            <img th:src="@{/images/Manager.png}" class="card-img-top" alt="Administradores">
+            <div class="card-body">
+                <h5 class="card-title">Administrar Administradores</h5>
+                <a th:href="@{/Manager}" class="btn btn-primary btn-lg btn-block">Ver</a>
+            </div>
+        </div>
+        <div class="card">
+            <img th:src="@{/images/Employee.png}" class="card-img-top" alt="Empleados">
+            <div class="card-body">
+                <h5 class="card-title">Administrar Empleados</h5>
+                <a th:href="@{/Employee}" class="btn btn-primary btn-lg btn-block">Ver</a>
+            </div>
+        </div>
+        <div class="card">
+            <img th:src="@{/images/Client.png}" class="card-img-top" alt="Clientes">
+            <div class="card-body">
+                <h5 class="card-title">Administrar Clientes</h5>
+                <a th:href="@{/Client}" class="btn btn-primary btn-lg btn-block">Ver</a>
+            </div>
+        </div>
+    </div>
+
+    <div sec:authorize="hasAuthority('Administrador')">
+        <button type="button" class="btn btn-primary" onclick="location.href='./DeactivateUser'">Ver Usuarios
+            Desactivados</button>
+    </div>
+    <div th:replace="commons/nav-bars :: scripts-administrador"></div>
+</body>
+
+</html>

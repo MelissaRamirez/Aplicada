@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+h1 {
+	font-family: 'BlackJackRegular';
+	text-align: center;
+	font-size: 60px;
+}
+
+ion-icon {
+	font-size: 20px;
+}
+
+body{
+	background-image: url("/src/main/resources/static/images/fondo.png");
+}

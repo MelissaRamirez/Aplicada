@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <div th:replace="commons/nav-bars :: header-administrador"></div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/CSS/Tax/Tax.css}">
+    <link rel="stylesheet" th:href="@{/CSS/Fonts/font-blackjack.css}">
+    <title>Tax</title>
+</head>
+
+<body>
+    <nav th:insert="commons/nav-bars :: navbar-administrador"></nav>
+    <h1>Agregar Impuesto</h1>
+    <form action="#" th:object="${taxForm}" th:action="@{/AddTax}" method="POST">
+        <div class="form-group">
+            <label>Nombre del Impuesto:</label>
+            <input class="form-control" id="taxType" type="text" th:field="*{type}" placeholder="Nombre del Impuesto">
+            <div th:if="${#fields.hasErrors('type')}">
+                <span style="color: red">Debe ingresar un nombre que contenga como mínimo 5 caracteres y máximo 50</span>
+            </div>
+            <label>Porcentaje del Impuesto:</label>
+            <input class="form-control" id="taxPercentage" type="number" th:field="*{percentage}"
+                placeholder="Porcentaje del Impuesto" min="0" step=".01">
+            <div th:if="${#fields.hasErrors('percentage')}">
+                <span style="color: red">Debe ingresar un porcentaje válido</span>
+            </div>
+            <button type="submit" class="btn btn-outline-primary">Agregar</button>
+            <button type="button" class="btn btn-outline-warning" onclick="location.href='./Tax'">Cancelar</button>
+        </div>
+    </form>
+    <div th:replace="commons/nav-bars :: scripts-administrador">
+    </div>
+</body>
+
+</html>

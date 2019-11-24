@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <nav th:insert="commons/nav-bars :: navbar-administrador"></nav>
+    <div class="container">
+        <h4>Insertar un nuevo producto</h4>
+        <form class="form-horizontal" action="insertProduct" th:object="${productForm}" th:action="@{/insertProduct}"
+            method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="inputName">Nombre</label>
+                <input class="form-control" id="inputName" type="text" th:field="*{name}" placeholder="Nombre">
+                <div th:if="${#fields.hasErrors('name')}"><span style="color: red">El nombre debe ser de al menos cinco caracteres</span></div>
+            </div>
+            <div class="form-group">
+                <label for="inputPrice">Precio</label>
+                <input class="form-control" id="inputPrice" type="text" th:field="*{price}" placeholder="Precio">
+                <div th:if="${#fields.hasErrors('price')}"><span style="color: red">El precio del producto debe ser como mínimo 1000 colones</span></div>
+            </div>
+            <div class="form-group">
+                <label for="inputPrice">Unidades</label>
+                <input class="form-control" id="inputUnits" type="text" th:field="*{unitsOnStock}" placeholder="Año">
+                <div th:if="${#fields.hasErrors('unitsOnStock')}"><span style="color: red">Mínimo 1 unidad y máximo 200 por producto</span></div>
+            </div>
+            <div class="form-group">
+                <label for="description">Descripcion</label>
+                <textarea class="form-control" id="description" th:field="*{description}"></textarea>
+                <div th:if="${#fields.hasErrors('description')}"><span style="color: red">Mínimo 10 caracteres y máximo 500</span></div>
+            </div>
+            <div class="form-group">
+                <label for="selectCategories">Categoría</label>
+                <select th:field="*{category}" class="form-control" id="selectCategories" size="3">
+                    <option th:each="category:${categories}"
+                            th:value="${category.id}"
+                            th:text="${category.name}">
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="selectFamilies">Familia</label>
+                <select th:field="*{families}" class="form-control" id="selectFamilies" size="3" multiple>
+                    <option th:each="family:${families}"
+                            th:value="${family.id}"
+                            th:text="${family.name}">
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="imgSelect">Seleccionar imagenes</label>
+                <div class="custom-file" id="imgSelect">
+                    <input type="file" class="custom-file-input" name="myFile" multiple id="customFile"/>
+                    <label class="custom-file-label" for="customFile">Choose files...</label>
+                    <div class="invalid-feedback">Se debe seleccionar al menos una imagen</div>
+                </div>
+            </div>
+            <input type="submit" value="Insertar" class="btn btn-primary">
+        </form>
+    </div>
+</body>
+</html>

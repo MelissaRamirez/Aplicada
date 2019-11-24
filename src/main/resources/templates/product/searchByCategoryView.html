@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Productos por categoria</title>
+    <div th:replace="commons/nav-bars :: header-administrador"></div>
+    <style>
+        #prodCard {
+            border-radius: 25px;
+            padding: 20px;
+            height: 200px;
+            width: 80%;
+            background-color: darkgray;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div th:replace="commons/nav-bars :: navbar-cliente"></div>
+    <div class="container">
+        <div th:if="${!products.isEmpty()}" class="row" >
+            <div id="prodCard" th:each="product, productStat: ${products}">
+                <div class="col-3" style="padding: 10px 10px 0 10px"%>
+                    <img th:attr="src=@{|/uploaded-img/${product.imagenes.get(0).webFilePath}|}"
+                         alt="Producto" width="150" class="rounded float-left"/>
+                </div>
+                <div class="col-sm">
+                    <label th:text="${product.name}"></label><br>
+                    <label th:text="${product.price}"></label><br>
+                    <a href="#" th:href="@{/productDetails(productID=${product.id})}" class="btn btn-primary btn-sm">Ver</a>
+                </div>
+            </div>
+        </div>
+        <div th:if="${products.isEmpty()}" class="row" >
+            <img th:src="@{/images/NoRecordFound.png}" class="rounded mx-auto d-block" alt="No records">
+        </div>
+    </div>
+    <div th:replace="commons/nav-bars :: scripts-administrador"></div>
+</body>
+</html>

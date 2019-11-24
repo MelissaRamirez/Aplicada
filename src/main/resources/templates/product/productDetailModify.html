@@ -1,0 +1,58 @@
+s
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Detalles del producto</title>
+    <div th:replace="commons/nav-bars :: header-administrador"></div>
+</head>
+
+<body>
+    <div th:replace="commons/nav-bars :: navbar-cliente"></div>
+    <div class="container">
+        <div class="row" style="background-color: darkgray" id="rcorners1">
+            <div class="col-3" style="padding: 10px 0 0 0">
+                <img th:src="@{'/uploaded-img/' + ${product.imagenes.get(0).webFilePath}}" alt="Producto" width="250"
+                    class="rounded float-left" />
+            </div>
+            <div class="col-sm">
+                <form th:object="${productItemForm}" th:action="@{/UpdateItemShoppingCart}" method="POST">
+                    <div class="form-group">
+                        <input type="hidden" id="productId" name="productId" th:field="*{id}">
+                        <label for="nameInput">Nombre</label>
+                        <input type="text" class="form-control" id="nameInput" th:field="*{name}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="priceInput">Precio</label>
+                        <input type="text" class="form-control" id="priceInput" th:field="*{price}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="unitsInput">Unidades Disponibles</label>
+                        <input type="number" class="form-control" id="unitsInput" th:field="*{unitsOnStock}" readonly>
+                        <label for="unitsInput">Unidades Deseadas</label>
+                        <input type="number" id="quantity" class="form-control" th:field="*{quantity}" name="quantity"
+                            oninput="quantityValidation()">
+                        <label id="lblError"></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="categoryInput">Categoría</label>
+                        <input type="text" class="form-control" id="categoryInput" th:field="*{category.name}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="descriptionTextArea">Descripción</label>
+                        <textarea class="form-control" id="descriptionTextArea" rows="3" th:field="*{description}"
+                            readonly></textarea>
+                    </div>
+                    <button id="btnBuy" href="#" type="submit" class="btn btn-primary btn-sm">Modificar</button>
+                    <button href="#" type="button" onclick="location.href='./home'"
+                        class="btn btn-danger btn-sm">Volver</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div th:replace="commons/nav-bars :: scripts-administrador"></div>
+    <script th:src="@{/js/action.js}"></script>
+</body>
+
+</html>

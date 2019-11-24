@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <div th:replace="commons/nav-bars :: header-administrador"></div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/CSS/user/user.css}">
+    <link rel="stylesheet" th:href="@{/CSS/Fonts/font-blackjack.css}">
+    <title>Client Details</title>
+</head>
+
+<body>
+    <nav th:insert="commons/nav-bars :: navbar-cliente"></nav>
+
+    <h1>Detalles del Cliente</h1>
+
+    <form action="#" th:object="${contactInformationForm}" th:action="@{/AddContactInfo}" method="POST">
+        <div class="form-group">
+            <label>Teléfono:</label>
+            <input type="tel" id="phone" th:field="*{phone}" class="form-control" placeholder="Ingrese su teléfono">
+            <label>Email:</label>
+            <input type="email" id="email" th:field="*{email}" class="form-control" placeholder="Ingrese su email">
+            <div>
+                <button type="submit" class="btn btn-outline-success">Agregar</button>
+                <button type="button" onclick="location.href='./home'" class="btn btn-outline-danger">Cancelar</button>
+            </div>
+        </div>
+
+    </form>
+
+    <div th:replace="commons/nav-bars :: scripts-administrador"></div>
+
+</body>
+
+</html>

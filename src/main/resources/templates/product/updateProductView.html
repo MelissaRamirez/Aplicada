@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Actualizar Producto</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/CSS/Product/updateProductView.css}">
+</head>
+
+<body>
+    <nav th:insert="commons/nav-bars :: navbar-administrador"></nav>
+    <div class="container">
+        <div id="dheader">
+            <h2>Actualizar producto</h2>
+        </div>
+        <div class="row" style="background-color: darkgray" id="rcorners1">
+            <div class="col-3" style="padding: 10px 0 0 0">
+                <img th:src="@{'/uploaded-img/' + ${product.imagenes.get(0).webFilePath}}" alt="Producto" width="250"
+                    class="rounded float-left" />
+            </div>
+            <div class="col-sm">
+                <form th:object="${productForm}" th:action="@{/updateProduct}" method="post"
+                    enctype="multipart/form-data">
+                    <input type="text" class="form-control" th:field="${product.id}" hidden>
+                    <div class="form-group">
+                        <label for="nameInput">Nombre</label>
+                        <input type="text" class="form-control" id="nameInput" th:field="${product.name}">
+                    </div>
+                    <div class="form-group">
+                        <label for="priceInput">Precio</label>
+                        <input type="text" class="form-control" id="priceInput" th:field="${product.price}">
+                    </div>
+                    <div class="form-group">
+                        <label for="unitsInput">Unidades</label>
+                        <input type="text" class="form-control" id="unitsInput" th:field="${product.unitsOnStock}">
+                    </div>
+                    <div class="form-group">
+                        <label for="selectCategories">Categoría</label>
+                        <select th:field="*{category}" class="form-control" id="selectCategories" size="3">
+                            <option th:each="category : ${categories}" th:value="${category.id}"
+                                th:text="${category.name}">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="selectCategories">Familias</label>
+                        <select th:field="*{families}" class="form-control" id="" size="3" multiple>
+                            <option th:each="family : ${allFamilies}" th:value="${family.id}" th:text="${family.name}">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="descriptionTextArea">Descripción</label>
+                        <textarea class="form-control" id="descriptionTextArea" rows="3"
+                            th:field="${product.description}"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="imgSelect">Añadir nuevas imagenes</label>
+                        <div class="custom-file" id="imgSelect">
+                            <input type="file" class="custom-file-input" name="myFile" multiple id="customFile" />
+                            <label class="custom-file-label" for="customFile">Choose files...</label>
+                            <div class="invalid-feedback">Se debe seleccionar al menos una imagen</div>
+                        </div>
+                    </div>
+                    <input type="submit" value="Actualizar" class="btn btn-primary btn-sm">
+                    <a href="#" th:href="@{/findByName}" class="btn btn-danger btn-sm">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

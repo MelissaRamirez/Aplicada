@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <div th:replace="commons/nav-bars :: header-administrador"></div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/CSS/Tax/Tax.css}">
+    <link rel="stylesheet" th:href="@{/CSS/Fonts/font-blackjack.css}">
+    <title>Tax</title>
+</head>
+
+<body>
+    <nav th:insert="commons/nav-bars :: navbar-administrador"></nav>
+
+    <h1>Administrar Impuestos en el Sistema</h1>
+
+    <button onclick="location.href='./AddTax'" class="btn btn-outline-info">Agregar Impuesto</button>
+    <table id="table_tax" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Nombre del Impuesto</th>
+                <th>Porcentaje del Impuesto</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="tax : ${taxes}">
+                <td th:text="${tax.type}"></td>
+                <td th:text="${tax.percentage}"></td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <form action="#" th:action="@{/UpdateTax}" method="POST">
+                            <input type="hidden" th:value="${tax.id}" name="id">
+                            <button id="btn_update_tax" type="submit" class="btn btn-outline-primary">Modificar
+                                <ion-icon name="create"></ion-icon></button>
+                        </form>
+                        <form action="#" th:action="@{/DeleteTax}" method="POST">
+                            <input type="hidden" th:value="${tax.id}" name="id">
+                            <button id="btn_delete_tax" type="submit" class="btn btn-outline-danger">Eliminar
+                                <ion-icon name="trash"></ion-icon></button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div th:replace="commons/nav-bars :: scripts-administrador">
+    </div>
+</body>
+
+</html>

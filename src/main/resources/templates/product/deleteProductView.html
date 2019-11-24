@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sh="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Borrar Producto</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <style>
+        #rcorners1 {
+            border-radius: 25px;
+            background: #73AD21;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav th:insert="commons/nav-bars :: navbar-administrador"></nav>
+    <div class="container">
+        <h2>¿Está seguro de que desea eliminar este producto?</h2>
+        <div class="row" style="background-color: darkgray" id="rcorners1">
+            <div class="col-3" style="padding: 10px 0 0 0">
+                <img th:src="@{'/uploaded-img/' + ${product.imagenes.get(0).webFilePath}}" alt="Producto" width="250"
+                    class="rounded float-left" />
+            </div>
+            <div class="col-sm">
+                <form th:object="${product}">
+                    <div class="form-group">
+                        <label for="nameInput">Nombre</label>
+                        <input type="text" class="form-control" id="nameInput" th:field="*{name}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="priceInput">Precio</label>
+                        <input type="text" class="form-control" id="priceInput" th:field="*{price}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="unitsInput">Unidades</label>
+                        <input type="text" class="form-control" id="unitsInput" th:field="*{unitsOnStock}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="categoryInput">Categoría</label>
+                        <input type="text" class="form-control" id="categoryInput" th:field="*{category.name}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="descriptionTextArea">Descripción</label>
+                        <textarea class="form-control" id="descriptionTextArea" rows="3" th:field="*{description}"
+                            readonly></textarea>
+                    </div>
+                    <a href="#" th:href="@{/confirmDeleteProduct(productID=${product.id})}"
+                        class="btn btn-primary btn-sm">Confirmar</a>
+                    <a href="#" th:href="@{/findByName}" class="btn btn-danger btn-sm">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
